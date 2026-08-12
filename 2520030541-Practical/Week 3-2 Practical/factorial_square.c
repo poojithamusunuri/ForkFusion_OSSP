@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -7,7 +8,7 @@ int main()
 {
     int num;
     pid_t pid;
-    long long factorial = 1;
+    char str[20];
 
     printf("Enter a number: ");
     scanf("%d", &num);
@@ -16,29 +17,26 @@ int main()
 
     if (pid < 0)
     {
-        printf("Fork failed!\n");
-        return 1;
+        printf("Fork Failed\n");
+        exit(1);
     }
-    else if (pid == 0)
+
+    if (pid == 0)
     {
-        printf("\n--- Child Process ---\n");
-        printf("Child PID : %d\n", getpid());
-        printf("Parent PID: %d\n", getppid());
+        // Child Process
+        sprintf(str, "%d", num);
 
-        for (int i = 1; i <= num; i++)
-        {
-            factorial *= i;
-        }
+        execl("./factorial", "factorial", str, NULL);
 
-        printf("Factorial of %d = %lld\n", num, factorial);
+        // Executes only if exec fails
+        perror("exec failed");
     }
     else
     {
+        // Parent Process
         wait(NULL);
 
         printf("\n--- Parent Process ---\n");
-        printf("Parent PID: %d\n", getpid());
-
         printf("Square of %d = %d\n", num, num * num);
     }
 
