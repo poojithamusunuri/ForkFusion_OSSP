@@ -1,56 +1,121 @@
 # Operating Systems Lab
 
-# Week 3-2 Practical – Parent and Child Process using fork()
+# Week 3-2 Practical – Process Creation and exec()
 
 ## Aim
 
-To perform and understand process creation using the `fork()` system call, calculate the factorial of a number in the child process, and calculate its square in the parent process.
+To understand process creation using `fork()` and process replacement using the `exec()` system call.
 
 ---
 
 ## Procedure
 
-### Step 1: Create the source file
+### Program 1 – factorial.c
+
+#### Step 1: Create the Source File
 
 **Command**
 
 ```bash
-touch factorial_square.c
+touch factorial.c
 ```
 
 **Output**
 
 ```text
-No output (command executed successfully).
+(No output)
 ```
 
 **Explanation**
 
-Creates the C source file for the program.
+Creates the C source file `factorial.c`, which contains the factorial calculation performed by the child process.
 
 ---
 
-### Step 2: Edit the source file
+#### Step 2: Open the Source File
 
 **Command**
 
 ```bash
-nano factorial_square.c
+open -a TextEdit factorial.c
 ```
 
 **Output**
 
 ```text
-Editor opened successfully.
+(TextEdit opens the file)
 ```
 
 **Explanation**
 
-The C program is entered and saved.
+Opens `factorial.c` so that the program code can be entered and saved.
 
 ---
 
-### Step 3: Compile the program
+#### Step 3: Compile factorial.c
+
+**Command**
+
+```bash
+clang factorial.c -o factorial
+```
+
+**Output**
+
+```text
+(No output)
+```
+
+**Explanation**
+
+Compiles `factorial.c` and creates the executable `factorial`.
+
+---
+
+#### Step 4: Execute factorial
+
+**Command**
+
+```bash
+./factorial 5
+```
+
+**Output**
+
+```text
+--- Child Process (exec) ---
+Factorial of 5 = 120
+```
+
+**Explanation**
+
+Executes the factorial program with `5` as the command-line argument. The child process calculates the factorial after the `exec()` system call replaces the child process's previous program image.
+
+---
+
+### Program 2 – factorial_square.c
+
+#### Step 5: Open the Parent Program
+
+**Command**
+
+```bash
+open -a TextEdit factorial_square.c
+```
+
+**Output**
+
+```text
+(TextEdit opens the file)
+```
+
+**Explanation**
+
+Opens `factorial_square.c`, which creates the child process and executes the separate `factorial` program.
+
+---
+
+#### Step 6: Compile factorial_square.c
 
 **Command**
 
@@ -61,16 +126,16 @@ clang factorial_square.c -o factorial_square
 **Output**
 
 ```text
-No output (Compilation successful).
+(No output)
 ```
 
 **Explanation**
 
-Compiles the source code and generates the executable file `factorial_square`.
+Compiles `factorial_square.c` and creates the executable `factorial_square`.
 
 ---
 
-### Step 4: Execute the program
+#### Step 7: Execute factorial_square
 
 **Command**
 
@@ -83,44 +148,38 @@ Compiles the source code and generates the executable file `factorial_square`.
 ```text
 Enter a number: 5
 
---- Child Process ---
-Child PID : 5263
-Parent PID: 5262
+--- Child Process (exec) ---
 Factorial of 5 = 120
-
 --- Parent Process ---
-Parent PID: 5262
 Square of 5 = 25
 ```
 
-> *The Process IDs (PIDs) will differ on each execution.*
-
 **Explanation**
 
-The child process computes the factorial of the entered number. The parent process waits for the child to complete using `wait()`, then computes and displays the square of the same number.
+The program accepts a number, creates a child using `fork()`, and the child uses `exec()` to run the separate `factorial` program. After the child completes, the parent calculates and displays the square of the same number.
 
 ---
 
-### Step 5: Remove the executable
+#### Step 8: Remove the Compiled Executables
 
 **Command**
 
 ```bash
-rm factorial_square
+rm factorial factorial_square
 ```
 
 **Output**
 
 ```text
-No output (command executed successfully).
+(No output)
 ```
 
 **Explanation**
 
-Removes the compiled executable, leaving only the source code in the directory.
+Removes the compiled executable files while keeping the source programs for submission.
 
 ---
 
 ## Result
 
-Successfully created a child process using the `fork()` system call, computed the factorial of a number in the child process, synchronized execution using `wait()`, and computed the square of the same number in the parent process.
+Successfully demonstrated process creation using `fork()` and process replacement using the `exec()` system call. The child process executed a separate factorial program while the parent process calculated the square of the entered number.
