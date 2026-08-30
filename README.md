@@ -1,7 +1,7 @@
-# ForkFusion_OSSP
+# Thread-Runners_OSSP
 
 ## 👥 Team Name
-**ForkFusion**
+**Thread-Runners**
 
 ## 📚 Course
 Operating Systems and System Programming (OSSP)
@@ -10,8 +10,9 @@ Operating Systems and System Programming (OSSP)
 
 | Roll Number |
 |-------------|
-| 2520030484 |
 | 2520030541 |
+| 2520030068 |
+| 2520030103 |
 
 ## 📁 Repository Structure
 
