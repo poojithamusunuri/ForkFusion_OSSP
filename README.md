@@ -28,12 +28,6 @@ ForkFusion_OSSP
     └── NanoKernel
 ```
 
-## 🎯 Repository Purpose
-
-This repository contains:
-- OSSP Practical Programs
-- Skill-based Exercises
-- ForgeOS Semester Project
 
 ## 🚀 Semester Project
 
